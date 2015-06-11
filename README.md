@@ -1,0 +1,49 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc2.svg?branch=master)](https://travis-ci.org/cboettig/pmc2) [![Coverage Status](https://coveralls.io/repos/cboettig/pmc2/badge.svg)](https://coveralls.io/r/cboettig/pmc2)
+
+**Beta, use with caution!**
+
+This is a lightweight implementation of my `pmc` package focusing on what I think are the more common use cases (e.g. it will no longer support comparisons of a `geiger` model against an `ouch` model). Further, it does not cover many of the newer model fitting that have been implemented since `pmc` was first released.
+
+The goal of this release is mostly to provide compatibility with current versions of `geiger`.
+
+Getting started
+---------------
+
+Install the package:
+
+``` r
+library("devtools")
+install_github("cboettig/pmc2")
+```
+
+A trivial example with data simulated from the `lambda` model.
+
+``` r
+library("pmc")
+library("geiger")
+phy <- sim.bdtree(n=20)
+dat <- sim.char(rescale(phy, "lambda", .2), 1)[,1,]
+out <- pmc(phy, dat, "BM", "lambda", nboot = 100)
+```
+
+Plot the results:
+
+``` r
+dists <- data.frame(null = out$null, test = out$test)
+library("ggplot2")
+library("tidyr")
+library("dplyr")
+dists %>% 
+  gather(dist, value) %>%
+  ggplot(aes(value, fill = dist)) + 
+  geom_density(alpha = 0.5) + 
+  geom_vline(xintercept = out$lr)
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
+Citation
+--------
+
+Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <doi:10.1111/j.1558-5646.2011.01574.x>

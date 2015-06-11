@@ -1,0 +1,95 @@
+#' pmc
+#'
+#' Performs a phylogenetic monte carlo between modelA and modelB
+#'
+#' Simulates data under each model and returns the distribution of 
+#' likelihood ratio, L(B)/L(A), under for both simulated datasets.
+#' @param tree A phylogenetic tree.  Can be phylo (ape) or ouch tree
+#' @param data The data matrix
+#' @param modelA a model from the list, or a custom model, see details
+#' @param modelB any other model from the list, or custom model, see details
+#' @param nboot number of bootstrap replicates to use
+#' @param ... additional arguments to the fitting methods
+#' @param mc.cores number of parallel cores to use
+#' @return 
+#' list with the nboot likelihood ratios obtained from fitting both models
+#' to data simulated by model A, and the nboot likelihood ratios obtained
+#' by fitting both models to simulations from model B, and the likelihood 
+#' ratio between the original MLE estimated models from the data.  
+#' @import parallel 
+#' @export
+#' @examples
+#' library("geiger")
+#' geo=get(data(geospiza))
+#' tmp=treedata(geo$phy, geo$dat)
+#' phy=tmp$phy
+#' dat=tmp$data[,1]
+#' pmc(phy, dat, "BM", "lambda", nboot = 5, mc.cores=1) 
+pmc <- function(tree, data, modelA, modelB, nboot = 500, ...,  mc.cores = parallel::detectCores()){
+  fit_A <- pmc_fit(tree = tree, data = data, model = modelA,  ...)
+  fit_B <- pmc_fit(tree = tree, data = data, model = modelB,  ...)
+
+  lr_orig <- -2 * (logLik(fit_A) - logLik(fit_B))
+
+## 1000 Simulations under each model
+  A_sims <- simulate(fit_A, nboot)
+  B_sims <- simulate(fit_B, nboot)
+
+## here are the four fits
+  AA <- mclapply(1:nboot, function(i) update(fit_A, A_sims[,i]), mc.cores = mc.cores)
+  AB <- mclapply(1:nboot, function(i) update(fit_B, A_sims[,i]), mc.cores = mc.cores)
+  BA <- mclapply(1:nboot, function(i) update(fit_A, B_sims[,i]), mc.cores = mc.cores)
+  BB <- mclapply(1:nboot, function(i) update(fit_B, B_sims[,i]), mc.cores = mc.cores)
+
+## which create 2 distributions
+  null_dist = -2 * (sapply(AA, logLik) - sapply(AB, logLik))
+  test_dist = -2 * (sapply(BA, logLik) - sapply(BB, logLik))
+
+  list(lr = lr_orig, null = null_dist, test = test_dist) 
+
+}
+
+
+#' Fit any model used in PMC 
+#'
+#' The fitting function used by pmc to generalize fitting to any model
+#' @param tree a phylogenetic tree. can be ouch or ape format
+#' @param data trait data in ape or ouch format
+#' @param model the name of the model to fit, 
+#' @param ... whatever additional options would be provided 
+#' to the model fit
+#' @return a pmc_model object, anything that has methods "simulate", 
+#' "update", "logLik", "coef"
+#' @import geiger ouch 
+pmc_fit <- function(tree, data, model, ...){
+  # Figure out if we need ape/geiger based formats or ouch formats
+  fitContinuous_types <- c("BM", "OU", "lambda", "kappa", 
+                           "delta", "EB", "white", "trend")
+
+  if(model %in% fitContinuous_types){
+    type <- "fitContinuous"  
+  } else if(model %in% c("brown", "hansen")){
+    type <- "hansen"
+  } else {
+    stop(paste("Model", model, "not recognized"))
+  }
+
+  ## Run a fitContinuous fit ##
+  if(type == "fitContinuous"){
+    object <- fitContinuous(phy = tree, dat = data, model = model, ..., ncores=1)
+
+  
+  } else if(type == "hansen"){
+    if(model == "hansen")
+       object <- hansen(data = data, tree = tree, ...)
+    else if(model == "brown")
+       object <- brown(data = data, tree = tree, ...)
+
+  } else {
+    stop("Error: format not recognized.")
+  }
+
+  object
+}
+
+
