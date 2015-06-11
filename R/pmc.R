@@ -24,7 +24,9 @@
 #' tmp=treedata(geo$phy, geo$dat)
 #' phy=tmp$phy
 #' dat=tmp$data[,1]
-#' pmc(phy, dat, "BM", "lambda", nboot = 5, mc.cores=1) 
+#' \donttest{ 
+#' pmc(phy, dat, "BM", "lambda", nboot = 20, mc.cores=1)
+#' }
 pmc <- function(tree, data, modelA, modelB, nboot = 500, ...,  mc.cores = parallel::detectCores()){
   fit_A <- pmc_fit(tree = tree, data = data, model = modelA,  ...)
   fit_B <- pmc_fit(tree = tree, data = data, model = modelB,  ...)
