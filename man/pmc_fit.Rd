@@ -17,10 +17,9 @@ pmc_fit(tree, data, model, ...)
 to the model fit}
 }
 \value{
-a pmc_model object, anything that has methods "simulate",
-"update", "logLik", "coef"
+the object returned by the model fitting routine (gfit for geiger, hansen/brown for ouch)
 }
 \description{
-The fitting function used by pmc to generalize fitting to any model
+The fitting function used by pmc to generalize fitting to both geiger and ouch models.
 }
 

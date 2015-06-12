@@ -45,6 +45,8 @@ geo=get(data(geospiza))
 tmp=treedata(geo$phy, geo$dat)
 phy=tmp$phy
 dat=tmp$data[,1]
-pmc(phy, dat, "BM", "lambda", nboot = 5, mc.cores=1)
+\donttest{
+pmc(phy, dat, "BM", "lambda", nboot = 20, mc.cores=1)
+}
 }
 

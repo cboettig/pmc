@@ -54,15 +54,15 @@ pmc <- function(tree, data, modelA, modelB, nboot = 500, ...,  mc.cores = parall
 
 #' Fit any model used in PMC 
 #'
-#' The fitting function used by pmc to generalize fitting to any model
+#' The fitting function used by pmc to generalize fitting to both geiger and ouch models.
 #' @param tree a phylogenetic tree. can be ouch or ape format
 #' @param data trait data in ape or ouch format
 #' @param model the name of the model to fit, 
 #' @param ... whatever additional options would be provided 
 #' to the model fit
-#' @return a pmc_model object, anything that has methods "simulate", 
-#' "update", "logLik", "coef"
+#' @return the object returned by the model fitting routine (gfit for geiger, hansen/brown for ouch) 
 #' @import geiger ouch 
+#' @export
 pmc_fit <- function(tree, data, model, ...){
   # Figure out if we need ape/geiger based formats or ouch formats
   fitContinuous_types <- c("BM", "OU", "lambda", "kappa", 
