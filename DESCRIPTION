@@ -11,10 +11,13 @@ URL: https://github.com/cboettig/pmc
 BugReports: https://github.com/cboettig/pmc/issues
 License: CC0 
 LazyData: true
-Suggests: testthat,
-    knitr,
-    covr
 VignetteBuilder: knitr
-Imports: geiger,
-    parallel,
-    ouch
+Suggests: 
+    covr,
+    ggplot2,
+    knitr,
+    testthat
+Imports: 
+  geiger,
+  parallel,
+  ouch
