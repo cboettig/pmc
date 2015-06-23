@@ -16,7 +16,7 @@
 #' to data simulated by model A, and the nboot likelihood ratios obtained
 #' by fitting both models to simulations from model B, and the likelihood 
 #' ratio between the original MLE estimated models from the data.  
-#' @import parallel 
+#' @import parallel dplyr tidyr 
 #' @export
 #' @examples
 #' library("geiger")
@@ -27,15 +27,15 @@
 #' \donttest{ 
 #' pmc(phy, dat, "BM", "lambda", nboot = 20, mc.cores=1)
 #' }
-pmc <- function(tree, data, modelA, modelB, nboot = 500, ...,  mc.cores = parallel::detectCores()){
-  fit_A <- pmc_fit(tree = tree, data = data, model = modelA,  ...)
-  fit_B <- pmc_fit(tree = tree, data = data, model = modelB,  ...)
+pmc <- function(tree, data, modelA, modelB, nboot = 500, optionsA = list(), optionsB = list(), ...,  mc.cores = parallel::detectCores()){
+  fit_A <- do.call(pmc_fit, c(list(tree = tree, data = data, model = modelA), c(optionsA, list(...))))
+  fit_B <- do.call(pmc_fit, c(list(tree = tree, data = data, model = modelB),  c(optionsB, list(...))))
 
   lr_orig <- -2 * (logLik(fit_A) - logLik(fit_B))
 
 ## 1000 Simulations under each model
-  A_sims <- simulate(fit_A, nboot)
-  B_sims <- simulate(fit_B, nboot)
+  A_sims <- format_sims(simulate(fit_A, nboot))
+  B_sims <- format_sims(simulate(fit_B, nboot))
 
 ## here are the four fits
   AA <- mclapply(1:nboot, function(i) update(fit_A, A_sims[,i]), mc.cores = mc.cores)
@@ -47,9 +47,35 @@ pmc <- function(tree, data, modelA, modelB, nboot = 500, ...,  mc.cores = parall
   null_dist = -2 * (sapply(AA, logLik) - sapply(AB, logLik))
   test_dist = -2 * (sapply(BA, logLik) - sapply(BB, logLik))
 
-  list(lr = lr_orig, null = null_dist, test = test_dist) 
+  suppressWarnings({
+  par_dists <- bind_rows(tidy_pars(AA), tidy_pars(AB), tidy_pars(BA), tidy_pars(BB)) 
+  })     
 
+  out <- list(lr = lr_orig, null = null_dist, test = test_dist, par_dists = par_dists, A = fit_A, B = fit_B) 
+  class(out) <- "pmc"
+  out
 }
+
+
+
+## Helper functions because no one returns tidy models.
+format_sims <- function(s){
+  if(is.list(s))
+    s <- bind_cols(s)
+  s
+}
+tidy_pars <- function(model, label = deparse(substitute(model))){
+  mtrx <- sapply(model, function(x) {
+                 out <- coef(x)
+                 if(is.list(out))
+                   out <- unlist(out)
+                 out
+          })
+  tmp <- data.frame(t(rbind(mtrx, rep = 1:dim(mtrx)[[2]])))
+  data.frame(comparison = label, gather(tmp, parameter, value, -rep))
+}
+
+
 
 
 #' Fit any model used in PMC 
@@ -93,5 +119,25 @@ pmc_fit <- function(tree, data, model, ...){
 
   object
 }
+
+
+
+
+#' plot the distributions
+#' @param x a pmc object
+#' @param ... Additional arguments: 
+#'  A= a name for the first model in the pmc pairwise comparison
+#'  B= a name for the second model in the pairwise comparison
+#' @import ggplot2
+#' @import tidyr 
+#' @export
+plot.pmc <- function(x, ...){
+    df <- data.frame(x$null, x$test)
+    colnames(df) <- c("null", "test")
+    dat <- gather(df, variable, value)
+    ggplot(dat) + geom_density(aes(value, fill=variable), alpha=.7) +
+           geom_vline(x=x$lr, lwd=1, lty=2)
+}
+
 
 
