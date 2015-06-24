@@ -19,7 +19,7 @@
 #' by fitting both models to simulations from model B, and the likelihood 
 #' ratio between the original MLE estimated models from the data.  
 #' @import parallel
-#' @importFrom dplyr bind_rows
+#' @importFrom dplyr bind_rows bind_cols
 #' @importFrom tidyr gather_
 #' @export
 #' @examples
@@ -65,7 +65,7 @@ pmc <- function(tree, data, modelA, modelB, nboot = 500, optionsA = list(), opti
 ## Helper functions because no one returns tidy models.
 format_sims <- function(s){
   if(is.list(s))
-    s <- bind_cols(s)
+    s <- dplyr::bind_cols(s)
   s
 }
 tidy_pars <- function(model, label = deparse(substitute(model))){
