@@ -1,21 +1,7 @@
-## Test environments
-* local OS X install, R 3.1.2
-* ubuntu 12.04 (on travis-ci), R 3.1.2
-* win-builder (devel and release)
+Dear CRAN Maintainers,
 
-## R CMD check results
-There were no ERRORs or WARNINGs. 
+This submission updates the previously archived `pmc` package to make it compatible with the current CRAN version of the `geiger` package, whose major updates several years ago broke `pmc` and led to it being archived. Though most of the methods have been re-written from scratch, this preserves the function API of the main functions of the package.
 
-There was 1 NOTE:
+Sincerely,
 
-* checking dependencies in R code ... NOTE
-  Namespace in Imports field not imported from: 'R6'
-
-  R6 is a build-time dependency.
-
-## Downstream dependencies
-I have also run R CMD check on downstream dependencies of httr 
-(https://github.com/wch/checkresults/blob/master/httr/r-release). All packages 
-that I could install passed except:
-
-* XYZ:...
+Carl Boettiger
