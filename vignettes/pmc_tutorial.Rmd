@@ -50,7 +50,7 @@ out <- pmc(phy, dat, "BM", "lambda", nboot = 50, mc.cores = cores)
 
 Plot the results:
 
-```{r}
+```{r fig.width=7}
 dists <- data.frame(null = out$null, test = out$test)
 dists %>% 
   gather(dist, value) %>%
@@ -144,10 +144,10 @@ ou3v4 <- pmc(tree, log(anoles["size"]), modelA = "hansen", modelB = "hansen",
              optionsA = list(regimes = anoles["OU.LP"]), 
              optionsB = list(regimes = anoles["OU.4"]),
              nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
-`
+
 ou3v15 <- pmc(tree, log(anoles["size"]), "hansen", "hansen", 
-             list(regimes = anoles["OU.LP"], sqrt.alpha = 1, sigma = 1), 
-             list(regimes = anoles["OU.15"], sqrt.alpha = 1, sigma = 1),
+             list(regimes = anoles["OU.LP"]), 
+             list(regimes = anoles["OU.15"]),
              nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
                    
 ou1v3 <- pmc(tree, log(anoles["size"]), "hansen", "hansen", 
@@ -157,16 +157,16 @@ ou1v3 <- pmc(tree, log(anoles["size"]), "hansen", "hansen",
  
 ou0v1 <- pmc(tree, log(anoles["size"]), "brown", "hansen", 
              list(), 
-             list(regimes = anoles["OU.1"]),
-             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
+             list(regimes = anoles["OU.1"], sqrt.alpha = 1, sigma = 1),
+             nboot = 100, mc.cores = cores)
 ```
 
 
 ```{r fig.width=7, fig.height=7}
-a <- plot(ou3v4, A = "OU.3", B ="OU.4") 
-b <- plot(ou3v15, A = "OU.3", B ="OU.15") 
-c <- plot(ou1v3, A = "OU.1", B = "OU.3") 
-d <- plot(ou0v1, A = "BM", B = "OU.1") 
+a <- plot(ou3v4, A = "OU.3", B ="OU.4") + labs(title = "OU.3 vs OU.4") 
+b <- plot(ou3v15, A = "OU.3", B ="OU.15") + labs(title = "OU.3 vs OU.15") 
+c <- plot(ou1v3, A = "OU.1", B = "OU.3")  + labs(title = "OU.1 vs OU.3")
+d <- plot(ou0v1, A = "BM", B = "OU.1")  + labs(title = "BM vs OU.1")
 grid.arrange(a, b, c, d, ncol = 2)
 ```
 
