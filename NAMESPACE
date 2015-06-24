@@ -2,9 +2,9 @@
 
 export(pmc)
 export(pmc_fit)
-import(dplyr)
 import(geiger)
 import(ggplot2)
 import(ouch)
 import(parallel)
-import(tidyr)
+importFrom(dplyr,bind_rows)
+importFrom(tidyr,gather_)

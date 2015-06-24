@@ -18,7 +18,9 @@
 #' to data simulated by model A, and the nboot likelihood ratios obtained
 #' by fitting both models to simulations from model B, and the likelihood 
 #' ratio between the original MLE estimated models from the data.  
-#' @import parallel dplyr tidyr 
+#' @import parallel
+#' @importFrom dplyr bind_rows
+#' @importFrom tidyr gather_
 #' @export
 #' @examples
 #' library("geiger")
