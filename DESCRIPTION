@@ -13,13 +13,14 @@ License: CC0
 LazyData: true
 VignetteBuilder: knitr
 Suggests: 
-    covr,
-    dplyr,
-    ggplot2,
-    knitr,
-    testthat,
-    tidyr
+  covr,
+  gridExtra,
+  knitr,
+  testthat
 Imports: 
+  dplyr,
   geiger,
+  ggplot2,
   parallel,
-  ouch
+  ouch,
+  tidyr

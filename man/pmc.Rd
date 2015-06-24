@@ -6,8 +6,8 @@
 \alias{pmc-package}
 \title{pmc}
 \usage{
-pmc(tree, data, modelA, modelB, nboot = 500, ...,
-  mc.cores = parallel::detectCores())
+pmc(tree, data, modelA, modelB, nboot = 500, optionsA = list(),
+  optionsB = list(), ..., mc.cores = parallel::detectCores())
 }
 \arguments{
 \item{tree}{A phylogenetic tree.  Can be phylo (ape) or ouch tree}
@@ -20,7 +20,11 @@ pmc(tree, data, modelA, modelB, nboot = 500, ...,
 
 \item{nboot}{number of bootstrap replicates to use}
 
-\item{...}{additional arguments to the fitting methods}
+\item{optionsA}{additional arguments to modelA}
+
+\item{optionsB}{additional arguments to modelB}
+
+\item{...}{additional arguments to both fitting methods}
 
 \item{mc.cores}{number of parallel cores to use}
 }

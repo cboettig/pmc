@@ -1,3 +1,66 @@
+---
+title: "pmc tutorial"
+author: "Carl Boettiger"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+**Beta, use with caution!**
+
+This is a lightweight implementation of my `pmc` package focusing on what I think are the more common use cases (e.g. it will no longer support comparisons of a `geiger` model against an `ouch` model). Further, it does not cover many of the newer model fitting that have been implemented since `pmc` was first released. 
+
+The goal of this release is mostly to provide compatibility with current versions of `geiger`.
+
+## Getting started
+
+```{r}
+knitr::opts_chunk$set(comment=NA, warning=FALSE, message=FALSE)
+```
+
+Install the package:
+
+```{r eval=FALSE}
+library("devtools")
+install_github("cboettig/pmc2")
+```
+
+```{r}
+library("pmc")
+library("geiger")
+library("ouch")
+library("ggplot2")
+library("tidyr")
+library("dplyr")
+library("gridExtra")
+```
+
+
+A trivial example with data simulated from the `lambda` model. 
+
+```{r}
+cores <- 1 # parallel cores available
+phy <- sim.bdtree(n=10)
+dat <- sim.char(rescale(phy, "lambda", .5), 1)[,1,]
+out <- pmc(phy, dat, "BM", "lambda", nboot = 50, mc.cores = cores)
+```
+
+Plot the results:
+
+```{r}
+dists <- data.frame(null = out$null, test = out$test)
+dists %>% 
+  gather(dist, value) %>%
+  ggplot(aes(value, fill = dist)) + 
+  geom_density(alpha = 0.5) + 
+  geom_vline(xintercept = out$lr)
+
+```
+
+
 
 ## Finches Examples
 
@@ -5,20 +68,9 @@ The first set of examples uses the finches data and geiger functions~\citep{Harm
 
 
 ```{r}
-library(pmc)
-library(geiger) 
-library(ouch)
-library(ggplot2)
-library(dplyr)
-
-```
-
-
-
-```{r}
 data(geospiza)
-bm_v_lambda <- pmc(geospiza$phy, geospiza$dat["wingL"],
-  "BM", "lambda", nboot=100) 
+bm_v_lambda <- pmc(geospiza$phy, geospiza$dat[, "wingL"],
+  "BM", "lambda", nboot=100, mc.cores = cores) 
 
 ```
 
@@ -86,43 +138,40 @@ Next we consider the examples re-analyzing the Anoles data from @Butler2004, usi
 
 ```{r}
 data(anoles)
-tree <- with(anoles,ouchtree(node,ancestor,time/max(time),species))
+tree <- with(anoles, ouchtree(node, ancestor, time / max(time), species))
 
-ou3v4 <- pmc(tree, log(anoles["size"]), modelA="hansen", modelB="hansen", 
-             optionsA=list(regimes=anoles["OU.LP"], sqrt.alpha=1, sigma=1), 
-             optionsB=list(regimes=anoles["OU.4"], sqrt.alpha=1, sigma=1),
-             nboot=100)
-
+ou3v4 <- pmc(tree, log(anoles["size"]), modelA = "hansen", modelB = "hansen", 
+             optionsA = list(regimes = anoles["OU.LP"]), 
+             optionsB = list(regimes = anoles["OU.4"]),
+             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
+`
 ou3v15 <- pmc(tree, log(anoles["size"]), "hansen", "hansen", 
-             list(regimes=anoles["OU.LP"], sqrt.alpha=1, sigma=1), 
-             list(regimes=anoles["OU.15"], sqrt.alpha=1, sigma=1),
-             nboot=100)
+             list(regimes = anoles["OU.LP"], sqrt.alpha = 1, sigma = 1), 
+             list(regimes = anoles["OU.15"], sqrt.alpha = 1, sigma = 1),
+             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
                    
 ou1v3 <- pmc(tree, log(anoles["size"]), "hansen", "hansen", 
-             list(regimes=anoles["OU.1"], sqrt.alpha=1, sigma=1), 
-             list(regimes=anoles["OU.LP"], sqrt.alpha=1, sigma=1),
-             nboot=100)
+             list(regimes = anoles["OU.1"]), 
+             list(regimes = anoles["OU.LP"]),
+             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
  
 ou0v1 <- pmc(tree, log(anoles["size"]), "brown", "hansen", 
              list(), 
-             list(regimes=anoles["OU.1"], sqrt.alpha=1, sigma=1),
-             nboot=100)
+             list(regimes = anoles["OU.1"]),
+             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
 ```
 
 
-```{r}
-a <- plot(ou3v4, A="OU.3", B="OU.4") 
-b <- plot(ou3v15, A="OU.3", B="OU.15") 
-c <- plot(ou1v3, A="OU.1", B="OU.3") 
-d <- plot(ou0v1, A="BM", B="OU.1") 
-
-grid.newpage()
-pushViewport(viewport(layout = grid.layout(2, 2)))
-vplayout <- function(x, y) viewport(layout.pos.row = x, layout.pos.col = y) 
-print(a, vp = vplayout(1, 1)) 
-print(b, vp = vplayout(1, 2)) 
-print(c, vp = vplayout(2, 1)) 
-print(d, vp = vplayout(2, 2))
+```{r fig.width=7, fig.height=7}
+a <- plot(ou3v4, A = "OU.3", B ="OU.4") 
+b <- plot(ou3v15, A = "OU.3", B ="OU.15") 
+c <- plot(ou1v3, A = "OU.1", B = "OU.3") 
+d <- plot(ou0v1, A = "BM", B = "OU.1") 
+grid.arrange(a, b, c, d, ncol = 2)
 ```
 
+
+## Citation
+
+Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. doi:10.1111/j.1558-5646.2011.01574.x 
 

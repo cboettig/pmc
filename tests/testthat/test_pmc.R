@@ -6,5 +6,5 @@ test_that("run pmc",
             phy <- tmp$phy
             dat <- tmp$data[,1]
             out <- pmc(phy, dat, "BM", "lambda", nboot = 10, mc.cores = 1)
-            expect_is(out, "list")
+            expect_is(out, "pmc")
           })

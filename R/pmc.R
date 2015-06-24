@@ -9,7 +9,9 @@
 #' @param modelA a model from the list, or a custom model, see details
 #' @param modelB any other model from the list, or custom model, see details
 #' @param nboot number of bootstrap replicates to use
-#' @param ... additional arguments to the fitting methods
+#' @param optionsA additional arguments to modelA
+#' @param optionsB additional arguments to modelB
+#' @param ... additional arguments to both fitting methods
 #' @param mc.cores number of parallel cores to use
 #' @return 
 #' list with the nboot likelihood ratios obtained from fitting both models
@@ -48,7 +50,7 @@ pmc <- function(tree, data, modelA, modelB, nboot = 500, optionsA = list(), opti
   test_dist = -2 * (sapply(BA, logLik) - sapply(BB, logLik))
 
   suppressWarnings({
-  par_dists <- bind_rows(tidy_pars(AA), tidy_pars(AB), tidy_pars(BA), tidy_pars(BB)) 
+  par_dists <- dplyr::bind_rows(tidy_pars(AA), tidy_pars(AB), tidy_pars(BA), tidy_pars(BB)) 
   })     
 
   out <- list(lr = lr_orig, null = null_dist, test = test_dist, par_dists = par_dists, A = fit_A, B = fit_B) 
@@ -72,7 +74,7 @@ tidy_pars <- function(model, label = deparse(substitute(model))){
                  out
           })
   tmp <- data.frame(t(rbind(mtrx, rep = 1:dim(mtrx)[[2]])))
-  data.frame(comparison = label, gather(tmp, parameter, value, -rep))
+  data.frame(comparison = label, tidyr::gather(tmp, parameter, value, -rep))
 }
 
 
@@ -121,15 +123,8 @@ pmc_fit <- function(tree, data, model, ...){
 }
 
 
-
-
-#' plot the distributions
-#' @param x a pmc object
-#' @param ... Additional arguments: 
-#'  A= a name for the first model in the pmc pairwise comparison
-#'  B= a name for the second model in the pairwise comparison
+#' @rdname plot
 #' @import ggplot2
-#' @import tidyr 
 #' @export
 plot.pmc <- function(x, ...){
     df <- data.frame(x$null, x$test)
