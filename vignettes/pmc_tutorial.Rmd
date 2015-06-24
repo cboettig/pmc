@@ -43,9 +43,10 @@ A trivial example with data simulated from the `lambda` model.
 
 ```{r}
 cores <- 1 # parallel cores available
+nboot <- 50 # too small, but vignette gotta build faster
 phy <- sim.bdtree(n=10)
 dat <- sim.char(rescale(phy, "lambda", .5), 1)[,1,]
-out <- pmc(phy, dat, "BM", "lambda", nboot = 50, mc.cores = cores)
+out <- pmc(phy, dat, "BM", "lambda", nboot = nboot, mc.cores = cores)
 ```
 
 Plot the results:
@@ -70,7 +71,7 @@ The first set of examples uses the finches data and geiger functions~\citep{Harm
 ```{r}
 data(geospiza)
 bm_v_lambda <- pmc(geospiza$phy, geospiza$dat[, "wingL"],
-  "BM", "lambda", nboot=100, mc.cores = cores) 
+  "BM", "lambda", nboot = nboot, mc.cores = cores) 
 
 ```
 
@@ -143,22 +144,22 @@ tree <- with(anoles, ouchtree(node, ancestor, time / max(time), species))
 ou3v4 <- pmc(tree, log(anoles["size"]), modelA = "hansen", modelB = "hansen", 
              optionsA = list(regimes = anoles["OU.LP"]), 
              optionsB = list(regimes = anoles["OU.4"]),
-             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
+             nboot = nboot, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
 
 ou3v15 <- pmc(tree, log(anoles["size"]), "hansen", "hansen", 
              list(regimes = anoles["OU.LP"]), 
              list(regimes = anoles["OU.15"]),
-             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
+             nboot = nboot, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
                    
 ou1v3 <- pmc(tree, log(anoles["size"]), "hansen", "hansen", 
              list(regimes = anoles["OU.1"]), 
              list(regimes = anoles["OU.LP"]),
-             nboot = 100, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
+             nboot = nboot, sqrt.alpha = 1, sigma = 1, mc.cores = cores)
  
 ou0v1 <- pmc(tree, log(anoles["size"]), "brown", "hansen", 
              list(), 
              list(regimes = anoles["OU.1"], sqrt.alpha = 1, sigma = 1),
-             nboot = 100, mc.cores = cores)
+             nboot = nboot, mc.cores = cores)
 ```
 
 
