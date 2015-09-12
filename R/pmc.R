@@ -76,8 +76,8 @@ tidy_pars <- function(model, label = deparse(substitute(model))){
                  out
           })
   tmp <- data.frame(t(rbind(mtrx, rep = 1:dim(mtrx)[[2]])))
-  i <- which(names(tmp)=="rep")
-  data.frame(comparison = label, tidyr::gather_(tmp, "parameter", "value", -i))
+  who <- names(tmp)[which(names(tmp)!="rep")]
+  data.frame(comparison = label, tidyr::gather_(tmp, "parameter", "value", who))
 }
 
 

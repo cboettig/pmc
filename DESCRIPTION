@@ -1,5 +1,5 @@
 Package: pmc
-Version: 1.0.0
+Version: 1.0.1
 Title: Phylogenetic Monte Carlo
 Description: Monte Carlo based model choice for applied phylogenetics of
     continuous traits. Method described in  Carl Boettiger, Graham Coop,
