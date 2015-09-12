@@ -16,6 +16,8 @@ test_that("we can run pmc_fit", {
 
 test_that("we can run tidy_gather internal methods", {
   fit_A <- pmc_fit(tree = phy, data = dat, model = "BM")
+  A_sims <- format_sims(simulate(fit_A, nboot))
+  
   AA <- parallel::mclapply(1:nboot, function(i) update(fit_A, A_sims[,i]), mc.cores = mc.cores)
   
   mtrx <- sapply(AA, function(x) {
@@ -35,6 +37,8 @@ test_that("we can run tidy_gather internal methods", {
 
 test_that("we can run tidy_gather", {
   fit_A <- pmc_fit(tree = phy, data = dat, model = "BM")
+  A_sims <- format_sims(simulate(fit_A, nboot))
+  
   AA <- parallel::mclapply(1:nboot, function(i) update(fit_A, A_sims[,i]), mc.cores = mc.cores)
   tidy_AA <- tidy_pars(AA)
   expect_is(tidy_AA, "data.frame")
