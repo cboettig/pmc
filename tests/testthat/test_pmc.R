@@ -47,7 +47,7 @@ test_that("we can run tidy_gather", {
 test_that("run pmc",
           {
             
-            out <- pmc(phy, dat, "BM", "lambda", nboot = 10, mc.cores = 1)
+            suppressWarnings(out <- pmc(phy, dat, "BM", "lambda", nboot = 10, mc.cores = 1))
             expect_is(out, "pmc")
 
             p <- plot(out)

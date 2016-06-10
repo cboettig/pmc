@@ -42,10 +42,10 @@ pmc <- function(tree, data, modelA, modelB, nboot = 500, optionsA = list(), opti
   B_sims <- format_sims(simulate(fit_B, nboot))
 
 ## here are the four fits
-  AA <- mclapply(1:nboot, function(i) update(fit_A, A_sims[,i]), mc.cores = mc.cores)
-  AB <- mclapply(1:nboot, function(i) update(fit_B, A_sims[,i]), mc.cores = mc.cores)
-  BA <- mclapply(1:nboot, function(i) update(fit_A, B_sims[,i]), mc.cores = mc.cores)
-  BB <- mclapply(1:nboot, function(i) update(fit_B, B_sims[,i]), mc.cores = mc.cores)
+  AA <- mclapply(1:nboot, function(i) update(fit_A, data.frame(A_sims[,i])), mc.cores = mc.cores)
+  AB <- mclapply(1:nboot, function(i) update(fit_B, data.frame(A_sims[,i])), mc.cores = mc.cores)
+  BA <- mclapply(1:nboot, function(i) update(fit_A, data.frame(B_sims[,i])), mc.cores = mc.cores)
+  BB <- mclapply(1:nboot, function(i) update(fit_B, data.frame(B_sims[,i])), mc.cores = mc.cores)
 
 ## which create 2 distributions
   null_dist = -2 * (sapply(AA, logLik) - sapply(AB, logLik))
