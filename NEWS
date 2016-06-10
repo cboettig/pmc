@@ -5,6 +5,13 @@ For a complete discription of changes see the
 [Issues page](https://github.com/cboettig/pmc/issues)
 on the package development site on GitHub.  
 
+
+v1.0.2
+------
+
+* Fixes bug introduced by new version of tidyr & dplyr
+
+
 v1.0.1
 ------
 
