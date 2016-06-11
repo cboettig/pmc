@@ -53,4 +53,4 @@ dists %>%
 
 ## Citation
 
-Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. doi:10.1111/j.1558-5646.2011.01574.x 
+Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <http://doi.org/10.1111/j.1558-5646.2011.01574.x> 

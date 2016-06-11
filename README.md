@@ -14,7 +14,7 @@ Install the package:
 
 ``` r
 library("devtools")
-install_github("cboettig/pmc")
+install_github("cboettig/pmc2")
 ```
 
 A trivial example with data simulated from the `lambda` model.
@@ -22,9 +22,14 @@ A trivial example with data simulated from the `lambda` model.
 ``` r
 library("pmc")
 library("geiger")
-phy <- sim.bdtree(n=20)
-dat <- sim.char(rescale(phy, "lambda", .2), 1)[,1,]
-out <- pmc(phy, dat, "BM", "lambda", nboot = 100)
+```
+
+    ## Loading required package: ape
+
+``` r
+phy <- sim.bdtree(n=10)
+dat <- sim.char(rescale(phy, "lambda", .5), 1)[,1,]
+out <- pmc(phy, dat, "BM", "lambda", nboot = 50)
 ```
 
 Plot the results:
@@ -34,6 +39,20 @@ dists <- data.frame(null = out$null, test = out$test)
 library("ggplot2")
 library("tidyr")
 library("dplyr")
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
 dists %>% 
   gather(dist, value) %>%
   ggplot(aes(value, fill = dist)) + 
@@ -46,4 +65,4 @@ dists %>%
 Citation
 --------
 
-Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <doi:10.1111/j.1558-5646.2011.01574.x>
+Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <http://doi.org/10.1111/j.1558-5646.2011.01574.x>
