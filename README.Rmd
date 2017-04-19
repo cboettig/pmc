@@ -21,7 +21,7 @@ Install the package:
 
 ```{r eval=FALSE}
 library("devtools")
-install_github("cboettig/pmc2")
+install_github("cboettig/pmc")
 ```
 
 A trivial example with data simulated from the `lambda` model. 
