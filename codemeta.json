@@ -1,0 +1,189 @@
+{
+  "@context": ["https://doi.org/doi:10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "pmc",
+  "description": "Monte Carlo based model choice for applied phylogenetics of\n    continuous traits. Method described in  Carl Boettiger, Graham Coop,\n    Peter Ralph (2012) Is your phylogeny informative? Measuring\n    the power of comparative methods, Evolution 66 (7)\n    2240-51. doi:10.1111/j.1558-5646.2011.01574.x.",
+  "name": "pmc: Phylogenetic Monte Carlo",
+  "codeRepository": "git://github.com/cboettig/pmc.git",
+  "issueTracker": "https://github.com/cboettig/pmc/issues",
+  "license": "https://spdx.org/licenses/CC0-1.0",
+  "version": "1.0.3",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.4.1",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.4.1 (2017-06-30)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Central R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Carl",
+      "familyName": "Boettiger",
+      "email": "cboettig@gmail.com"
+    }
+  ],
+  "maintainer": {
+    "@type": "Person",
+    "givenName": "Carl",
+    "familyName": "Boettiger",
+    "email": "cboettig@gmail.com"
+  },
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "gridExtra",
+      "name": "gridExtra",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "geiger",
+      "name": "geiger",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "parallel",
+      "name": "parallel"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ouch",
+      "name": "ouch",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyr",
+      "name": "tidyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    }
+  ],
+  "keywords": ["comparativemethods", "phylogenetics", "montecarlo", "traitevolution"],
+  "contIntegration": "https://travis-ci.org/cboettig/pmc",
+  "releaseNotes": "git://github.com/cboettig/pmc.git/blob/master/NEWS",
+  "readme": "git://github.com/cboettig/pmc.git/blob/master/README.md",
+  "fileSize": "10.442KB",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2012",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Carl",
+          "familyName": "Boettiger"
+        },
+        {
+          "@type": "Person",
+          "givenName": ["Graham", "M"],
+          "familyName": "Coop"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Peter",
+          "familyName": "Ralph"
+        }
+      ],
+      "name": "Is your phylogeny informative? Measuring the power of comparative methods.",
+      "identifier": "10.1111/j.1558-5646.2011.01574.x",
+      "url": "http://doi.org/10.1111/j.1558-5646.2011.01574.x",
+      "paginiation": "2240--51",
+      "@id": "https://doi.org/10.1111/j.1558-5646.2011.01574.x",
+      "sameAs": "https://doi.org/10.1111/j.1558-5646.2011.01574.x",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "issueNumber": "7",
+        "datePublished": "2012",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "name": "Evolution"
+        }
+      }
+    }
+  ]
+}

@@ -5,6 +5,10 @@ For a complete discription of changes see the
 [Issues page](https://github.com/cboettig/pmc/issues)
 on the package development site on GitHub.  
 
+v1.0.3
+------
+
+fix CITATION file to use as.person() compatible author list
 
 v1.0.2
 ------
