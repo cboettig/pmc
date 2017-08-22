@@ -17,4 +17,3 @@ updated gfit object
 \description{
 update method for gfit objects
 }
-

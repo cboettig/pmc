@@ -22,4 +22,3 @@ the object returned by the model fitting routine (gfit for geiger, hansen/brown 
 \description{
 The fitting function used by pmc to generalize fitting to both geiger and ouch models.
 }
-

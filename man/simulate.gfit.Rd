@@ -21,4 +21,3 @@ simulated dataset
 \description{
 simulate method for gfit objects
 }
-

@@ -1,8 +1,6 @@
 ^\.travis\.yml$
 ^cran-comments\.md$
 ^README\.Rmd$
-^README-.*\.png$
-^README_files$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^CONTRIBUTING\.md$

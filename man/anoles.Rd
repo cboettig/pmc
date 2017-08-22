@@ -8,4 +8,3 @@
 as from ouch with additional regimes added and minor formatting changes
 }
 \keyword{data}
-

@@ -3,6 +3,7 @@
 \docType{package}
 \name{pmc}
 \alias{pmc}
+\alias{pmc}
 \alias{pmc-package}
 \title{pmc}
 \usage{
@@ -53,4 +54,3 @@ dat=tmp$data[,1]
 pmc(phy, dat, "BM", "lambda", nboot = 20, mc.cores=1)
 }
 }
-

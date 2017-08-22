@@ -1,3 +1,7 @@
+``` r
+knitr::opts_knit$set(base.dir="tools/readme")
+```
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc) [![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
 
@@ -14,7 +18,7 @@ Install the package:
 
 ``` r
 library("devtools")
-install_github("cboettig/pmc2")
+install_github("cboettig/pmc")
 ```
 
 A trivial example with data simulated from the `lambda` model.
@@ -60,7 +64,7 @@ dists %>%
   geom_vline(xintercept = out$lr)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 Citation
 --------

@@ -8,4 +8,3 @@
 The bimaculus phylogeny, as from the ouch package
 }
 \keyword{data}
-
