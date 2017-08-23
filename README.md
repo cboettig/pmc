@@ -1,7 +1,3 @@
-``` r
-knitr::opts_knit$set(base.dir="tools/readme")
-```
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 [![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc) [![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
 
@@ -26,11 +22,7 @@ A trivial example with data simulated from the `lambda` model.
 ``` r
 library("pmc")
 library("geiger")
-```
-
-    ## Loading required package: ape
-
-``` r
+#> Loading required package: ape
 phy <- sim.bdtree(n=10)
 dat <- sim.char(rescale(phy, "lambda", .5), 1)[,1,]
 out <- pmc(phy, dat, "BM", "lambda", nboot = 50)
@@ -43,20 +35,14 @@ dists <- data.frame(null = out$null, test = out$test)
 library("ggplot2")
 library("tidyr")
 library("dplyr")
-```
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 dists %>% 
   gather(dist, value) %>%
   ggplot(aes(value, fill = dist)) + 
@@ -64,7 +50,7 @@ dists %>%
   geom_vline(xintercept = out$lr)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](man/figures/README-unnamed-chunk-3-1.png)
 
 Citation
 --------

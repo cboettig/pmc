@@ -4,8 +4,14 @@ output:
     variant: markdown_github
 ---
 
-```{r}
-knitr::opts_knit$set(base.dir="tools/readme")
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+)
 ```
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
