@@ -1,11 +1,20 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc) [![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
+[![Travis-CI Build
+Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc)
+[![Coverage
+Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/pmc)](https://cran.r-project.org/package=pmc)
+[![DOI](https://zenodo.org/badge/1822987.svg)](https://zenodo.org/badge/latestdoi/1822987)
 
-**Beta, use with caution!**
+This is a lightweight implementation of my `pmc` package focusing on
+what I think are the more common use cases (e.g. it will no longer
+support comparisons of a `geiger` model against an `ouch` model).
+Further, it does not cover many of the newer model fitting that have
+been implemented since `pmc` was first released.
 
-This is a lightweight implementation of my `pmc` package focusing on what I think are the more common use cases (e.g. it will no longer support comparisons of a `geiger` model against an `ouch` model). Further, it does not cover many of the newer model fitting that have been implemented since `pmc` was first released.
-
-The goal of this release is mostly to provide compatibility with current versions of `geiger`.
+The goal of this release is mostly to provide compatibility with current
+versions of `geiger`.
 
 Getting started
 ---------------
@@ -37,6 +46,9 @@ library("tidyr")
 library("dplyr")
 #> 
 #> Attaching package: 'dplyr'
+#> The following object is masked from 'package:ggplot2':
+#> 
+#>     vars
 #> The following objects are masked from 'package:stats':
 #> 
 #>     filter, lag
@@ -55,4 +67,6 @@ dists %>%
 Citation
 --------
 
-Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <http://doi.org/10.1111/j.1558-5646.2011.01574.x>
+Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny
+informative? Measuring the power of comparative methods, Evolution 66
+(7) 2240-51. <http://doi.org/10.1111/j.1558-5646.2011.01574.x>

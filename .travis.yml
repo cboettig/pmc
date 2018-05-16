@@ -1,22 +1,7 @@
 # Sample .travis.yml for R projects
-
 language: r
-warnings_are_errors: false # not building vignette creates a warning
-sudo: true
-r_build_args: "--no-build-vignettes"
-r_check_args: "--no-build-vignettes --as-cran"
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-
-r_apt_packages:
-  - testthat
-  - knitr
-
-r_github_packages:
-  - jimhester/covr
+sudo: false
+cache: packages
 
 after_success:
   - Rscript -e 'library(covr); coveralls()'

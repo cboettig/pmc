@@ -8,6 +8,7 @@ output:
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
+  cache = TRUE,
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-"
@@ -16,9 +17,12 @@ knitr::opts_chunk$set(
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc) [![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
+[![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc) 
+[![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
+[![CRAN status](https://www.r-pkg.org/badges/version/pmc)](https://cran.r-project.org/package=pmc)
+[![DOI](https://zenodo.org/badge/1822987.svg)](https://zenodo.org/badge/latestdoi/1822987)
 
-**Beta, use with caution!**
+
 
 This is a lightweight implementation of my `pmc` package focusing on what I think are the more common use cases (e.g. it will no longer support comparisons of a `geiger` model against an `ouch` model). Further, it does not cover many of the newer model fitting that have been implemented since `pmc` was first released. 
 
