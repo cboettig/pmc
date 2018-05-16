@@ -4,7 +4,7 @@ sudo: false
 cache: packages
 
 script:
-  - R CMD build .
+  - travis_wait 45 R CMD build .
   - travis_wait 45 R CMD check *tar.gz --as-cran
 
 after_success:
