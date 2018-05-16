@@ -3,5 +3,9 @@ language: r
 sudo: false
 cache: packages
 
+script:
+  - R CMD build .
+  - travis_wait 45 R CMD check *tar.gz --as-cran
+
 after_success:
-  - Rscript -e 'library(covr); coveralls()'
+  - travis_wait 30 Rscript -e 'library(covr); coveralls()'
