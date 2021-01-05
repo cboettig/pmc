@@ -9,7 +9,7 @@ citEntry(entry = "article",
   month = "July",
   number = "7",
   pages = "2240--51",
-  url = "http://doi.org/10.1111/j.1558-5646.2011.01574.x",
+  url = "https://doi.org/10.1111/j.1558-5646.2011.01574.x",
   textVersion = "Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. doi:10.1111/j.1558-5646.2011.01574.x")
 
 
