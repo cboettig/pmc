@@ -16,7 +16,8 @@ Suggests:
     covr,
     gridExtra,
     knitr,
-    testthat
+    testthat,
+    rmarkdown
 Imports:
     dplyr,
     geiger,
