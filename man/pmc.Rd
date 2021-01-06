@@ -3,12 +3,19 @@
 \docType{package}
 \name{pmc}
 \alias{pmc}
-\alias{pmc}
-\alias{pmc-package}
 \title{pmc}
 \usage{
-pmc(tree, data, modelA, modelB, nboot = 500, optionsA = list(),
-  optionsB = list(), ..., mc.cores = parallel::detectCores())
+pmc(
+  tree,
+  data,
+  modelA,
+  modelB,
+  nboot = 500,
+  optionsA = list(),
+  optionsB = list(),
+  ...,
+  mc.cores = parallel::detectCores()
+)
 }
 \arguments{
 \item{tree}{A phylogenetic tree.  Can be phylo (ape) or ouch tree}
@@ -37,8 +44,6 @@ ratio between the original MLE estimated models from the data.
 }
 \description{
 Performs a phylogenetic monte carlo between modelA and modelB
-
-pmc
 }
 \details{
 Simulates data under each model and returns the distribution of 

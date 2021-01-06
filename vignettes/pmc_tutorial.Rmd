@@ -1,7 +1,7 @@
 ---
 title: "pmc tutorial"
 author: "Carl Boettiger"
-date: "`r Sys.Date()`"
+date: "2021-01-06"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{PMC Vignette}
@@ -17,18 +17,21 @@ The goal of this release is mostly to provide compatibility with current version
 
 ## Getting started
 
-```{r}
+
+```r
 knitr::opts_chunk$set(comment=NA, warning=FALSE, message=FALSE)
 ```
 
 Install the package:
 
-```{r eval=FALSE}
+
+```r
 library("devtools")
 install_github("cboettig/pmc2")
 ```
 
-```{r}
+
+```r
 library("pmc")
 library("geiger")
 library("ouch")
@@ -41,7 +44,8 @@ library("gridExtra")
 
 A trivial example with data simulated from the `lambda` model. 
 
-```{r}
+
+```r
 cores <- 1 # parallel cores available
 nboot <- 50 # too small, but vignette gotta build faster
 phy <- sim.bdtree(n=10)
@@ -51,15 +55,17 @@ out <- pmc(phy, dat, "BM", "lambda", nboot = nboot, mc.cores = cores)
 
 Plot the results:
 
-```{r fig.width=7}
+
+```r
 dists <- data.frame(null = out$null, test = out$test)
 dists %>% 
   gather(dist, value) %>%
   ggplot(aes(value, fill = dist)) + 
   geom_density(alpha = 0.5) + 
   geom_vline(xintercept = out$lr)
-
 ```
+
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
 
 
 
@@ -68,11 +74,11 @@ dists %>%
 The first set of examples uses the finches data and geiger functions~\citep{Harmon2008} to look at uncertainty in parameter estimates using the pmc method.  We start off by loading the required libraries 
 
 
-```{r}
+
+```r
 data(geospiza)
 bm_v_lambda <- pmc(geospiza$phy, geospiza$dat[, "wingL"],
   "BM", "lambda", nboot = nboot, mc.cores = cores) 
-
 ```
 
 Currently the output will only run for a single trait at a time, for efficient memory usage.  Here we specify the wing length trait. 
@@ -96,35 +102,44 @@ items in the list returned by pmc (which we have named \verb|bm_v_lambda| above)
 Subsetting is a good way to get the parameter of interest, lambda, for the comparison of interest, BB.
 (Note that for comparisons AA and AB, which fit model Brownian motion, there is of course no parameter lambda).
 
-```{r}
+
+```r
 lambdas <- bm_v_lambda$par_dists %>% filter(comparison=="BB", parameter=="lambda") 
 ```
 
 The returned list from pmc also stores the two models it fit to the original data, inder the names A and B. 
 We can use this to extract the value of lambda estimated on model B from the raw data:
 
-```{r}
+
+```r
 est <- coef(bm_v_lambda[["B"]])[["lambda"]]
 ```
 
 
-```{r}
+
+```r
 ggplot(lambdas) + geom_histogram(aes(value)) +
       geom_vline(xintercept=est)
 ```
 
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
+
 Note that the ability to estimate lambda is very poor, with most simulations returning an estimate of almost zero despite the true value used in the simulations being \Sexpr{est}.  Estimating the sigma parameter is somewhat more reliable, even on this small tree:
 
-```{r}
+
+```r
 bm_v_lambda$par_dists %>% filter(comparison=="BB", parameter=="sigsq") %>% 
 ggplot() + geom_histogram(aes(sqrt(value))) 
 ```
+
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
 
 <!-- 
 
 We can also query the confidence intervals directly from the estimates returned by the pmc function.  Using the lambda value we already extracted, we can get confidence intervals, 
 
-```{r eval=FALSE}
+
+```r
 reshape2::cast(lambdas, comparison ~ parameter, function(x)
      quantile(x, c(.05, .95)), value=c("lower", "upper"))
 ```
@@ -137,7 +152,8 @@ reshape2::cast(lambdas, comparison ~ parameter, function(x)
 Next we consider the examples re-analyzing the Anoles data from @Butler2004, using methods from the `ouch` package.
 
 
-```{r}
+
+```r
 data(anoles)
 tree <- with(anoles, ouchtree(node, ancestor, time / max(time), species))
 
@@ -163,7 +179,8 @@ ou0v1 <- pmc(tree, log(anoles["size"]), "brown", "hansen",
 ```
 
 
-```{r fig.width=7, fig.height=7}
+
+```r
 results <- bind_rows(
   data.frame(comparison = "ou3v4", null = ou3v4$null, test = ou3v4$test, lr = ou3v4$lr),
   data.frame(comparison = "ou3v15", null = ou3v15$null, test = ou3v15$test, lr = ou3v15$lr),
@@ -176,9 +193,12 @@ ggplot(results) +
   facet_wrap(~ comparison, scales="free")
 ```
 
+![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png)
+
 
 <!--
-```{r fig.width=7, fig.height=7, eval=FALSE}
+
+```r
 a <- plot(ou3v4, A = "OU.3", B ="OU.4") + labs(title = "OU.3 vs OU.4") 
 b <- plot(ou3v15, A = "OU.3", B ="OU.15") + labs(title = "OU.3 vs OU.15") 
 c <- plot(ou1v3, A = "OU.1", B = "OU.3")  + labs(title = "OU.1 vs OU.3")

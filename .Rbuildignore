@@ -6,3 +6,5 @@
 ^CONTRIBUTING\.md$
 ^codemeta\.json$
 ^CRAN-RELEASE$
+vignettes/*.source.Rmd
+

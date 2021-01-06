@@ -1,4 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 [![Travis-CI Build
 Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc)
 [![Coverage
@@ -35,6 +36,9 @@ library("geiger")
 phy <- sim.bdtree(n=10)
 dat <- sim.char(rescale(phy, "lambda", .5), 1)[,1,]
 out <- pmc(phy, dat, "BM", "lambda", nboot = 50)
+#> Warning in fitContinuous(phy = tree, dat = data, model = model, ..., ncores = 1): 
+#> Parameter estimates appear at bounds:
+#>  lambda
 ```
 
 Plot the results:
@@ -46,9 +50,6 @@ library("tidyr")
 library("dplyr")
 #> 
 #> Attaching package: 'dplyr'
-#> The following object is masked from 'package:ggplot2':
-#> 
-#>     vars
 #> The following objects are masked from 'package:stats':
 #> 
 #>     filter, lag
@@ -69,4 +70,5 @@ Citation
 
 Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny
 informative? Measuring the power of comparative methods, Evolution 66
-(7) 2240-51. <http://doi.org/10.1111/j.1558-5646.2011.01574.x>
+(7) 2240-51.
+<a href="http://doi.org/10.1111/j.1558-5646.2011.01574.x" class="uri">http://doi.org/10.1111/j.1558-5646.2011.01574.x</a>
