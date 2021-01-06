@@ -3,7 +3,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc)
 [![Coverage
-Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
+Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/github/cboettig/pmc)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/pmc)](https://cran.r-project.org/package=pmc)
 [![DOI](https://zenodo.org/badge/1822987.svg)](https://zenodo.org/badge/latestdoi/1822987)
@@ -71,4 +71,4 @@ Citation
 Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny
 informative? Measuring the power of comparative methods, Evolution 66
 (7) 2240-51.
-<a href="http://doi.org/10.1111/j.1558-5646.2011.01574.x" class="uri">http://doi.org/10.1111/j.1558-5646.2011.01574.x</a>
+<a href="https://doi.org/10.1111/j.1558-5646.2011.01574.x" class="uri">https://doi.org/10.1111/j.1558-5646.2011.01574.x</a>

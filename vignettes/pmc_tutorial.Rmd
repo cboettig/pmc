@@ -65,7 +65,7 @@ dists %>%
   geom_vline(xintercept = out$lr)
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](fig/unnamed-chunk-5-1.png)
 
 
 
@@ -122,7 +122,7 @@ ggplot(lambdas) + geom_histogram(aes(value)) +
       geom_vline(xintercept=est)
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png)
+![plot of chunk unnamed-chunk-9](fig/unnamed-chunk-9-1.png)
 
 Note that the ability to estimate lambda is very poor, with most simulations returning an estimate of almost zero despite the true value used in the simulations being \Sexpr{est}.  Estimating the sigma parameter is somewhat more reliable, even on this small tree:
 
@@ -132,7 +132,7 @@ bm_v_lambda$par_dists %>% filter(comparison=="BB", parameter=="sigsq") %>%
 ggplot() + geom_histogram(aes(sqrt(value))) 
 ```
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](fig/unnamed-chunk-10-1.png)
 
 <!-- 
 
@@ -193,7 +193,7 @@ ggplot(results) +
   facet_wrap(~ comparison, scales="free")
 ```
 
-![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png)
+![plot of chunk unnamed-chunk-13](fig/unnamed-chunk-13-1.png)
 
 
 <!--

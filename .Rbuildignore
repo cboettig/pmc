@@ -7,4 +7,4 @@
 ^codemeta\.json$
 ^CRAN-RELEASE$
 vignettes/*.source.Rmd
-
+README_cache/

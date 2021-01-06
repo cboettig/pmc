@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Travis-CI Build Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc) 
-[![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/r/cboettig/pmc)
+[![Coverage Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/github/cboettig/pmc)
 [![CRAN status](https://www.r-pkg.org/badges/version/pmc)](https://cran.r-project.org/package=pmc)
 [![DOI](https://zenodo.org/badge/1822987.svg)](https://zenodo.org/badge/latestdoi/1822987)
 
@@ -67,4 +67,4 @@ dists %>%
 
 ## Citation
 
-Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <http://doi.org/10.1111/j.1558-5646.2011.01574.x> 
+Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. <https://doi.org/10.1111/j.1558-5646.2011.01574.x> 
