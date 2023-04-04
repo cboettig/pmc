@@ -20,12 +20,12 @@ Suggests:
     rmarkdown
 Imports:
     dplyr,
-    geiger >= 2.0.11,
+    geiger (>= 2.0.11),
     ggplot2,
     parallel,
     ouch,
     tidyr,
-    phytools >= 1.5-1
+    phytools (>= 1.5-1)
 RoxygenNote: 7.2.3
 Encoding: UTF-8
 
