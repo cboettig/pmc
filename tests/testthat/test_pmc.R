@@ -29,7 +29,8 @@ test_that("we can run tidy_gather internal methods", {
   tmp <- data.frame(t(rbind(mtrx, rep = 1:dim(mtrx)[[2]])))
   who <- which(names(tmp)!="rep")
   
-  tidy_AA <- data.frame(comparison = "AA", tidyr::gather_(tmp, "parameter", "value", names(tmp)[who]))
+  tidy_AA <- data.frame(comparison = "AA",
+                        tidyr::gather(tmp, "parameter", "value", names(tmp)[who]))
   expect_is(tidy_AA, "data.frame")
 })
 

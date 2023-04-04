@@ -9,15 +9,16 @@
 #' @param seed an optional seed for the simulations (not implemented)
 #' @param ... additional arguments, not implemented for gfit simulations
 #' @return simulated dataset
-#' @import geiger
+#' @importFrom geiger sim.char
+#' @importFrom phytools rescale
 simulate.gfit <- function(object, nsim = 1, seed = NULL, ...){
   att <- attributes(object$lik)
   model <- att$model
-  phy <- rescale(att$cache$phy, model, coef(object)[[1]])
+  phy <- phytools::rescale(att$cache$phy, model, coef(object)[[1]])
   z0 <- coef(object)[["z0"]]
   sigsq <- coef(object)[["sigsq"]]
 
-  x <- sim.char(phy = phy, par = sigsq, nsim = nsim, model = "BM", root = z0)
+  x <- geiger::sim.char(phy = phy, par = sigsq, nsim = nsim, model = "BM", root = z0)
   x[,1,]
 }
 
@@ -28,9 +29,10 @@ simulate.gfit <- function(object, nsim = 1, seed = NULL, ...){
 #' @param object a gfit object
 #' @param ... additional arguments, such as the data to use to update 
 #' @return updated gfit object 
-#' @import geiger
+#' @importFrom geiger fitContinuous
 update.gfit <- function(object, ...){
   att <- attributes(object$lik)
-  fitContinuous(phy = att$cache$phy, model = att$model, ..., ncores = 1)
+  geiger::fitContinuous(phy = att$cache$phy, model = att$model, ..., ncores = 1)
 }
+
 
