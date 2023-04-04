@@ -8,3 +8,4 @@
 ^CRAN-RELEASE$
 vignettes/*.source.Rmd
 README_cache/
+^\.github$

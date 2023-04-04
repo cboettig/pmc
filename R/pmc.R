@@ -20,7 +20,7 @@
 #' ratio between the original MLE estimated models from the data.  
 #' @import parallel
 #' @importFrom dplyr bind_rows bind_cols
-#' @importFrom tidyr gather_
+#' @importFrom tidyr gather
 #' @export
 #' @examples
 #' library("geiger")
@@ -52,10 +52,18 @@ pmc <- function(tree, data, modelA, modelB, nboot = 500, optionsA = list(), opti
   test_dist = -2 * (sapply(BA, logLik) - sapply(BB, logLik))
 
   suppressWarnings({
-  par_dists <- dplyr::bind_rows(tidy_pars(AA), tidy_pars(AB), tidy_pars(BA), tidy_pars(BB)) 
+  par_dists <- dplyr::bind_rows(tidy_pars(AA),
+                                tidy_pars(AB), 
+                                tidy_pars(BA), 
+                                tidy_pars(BB)) 
   })     
 
-  out <- list(lr = lr_orig, null = null_dist, test = test_dist, par_dists = par_dists, A = fit_A, B = fit_B) 
+  out <- list(lr = lr_orig,
+              null = null_dist, 
+              test = test_dist, 
+              par_dists = par_dists,
+              A = fit_A, 
+              B = fit_B) 
   class(out) <- "pmc"
   out
 }
@@ -92,7 +100,9 @@ tidy_pars <- function(model, label = deparse(substitute(model))){
 #' @param ... whatever additional options would be provided 
 #' to the model fit
 #' @return the object returned by the model fitting routine (gfit for geiger, hansen/brown for ouch) 
-#' @import geiger ouch 
+#' @importFrom ouch brown hansen
+#' @importFrom geiger fitContinuous
+#' @import ouch
 #' @export
 pmc_fit <- function(tree, data, model, ...){
   # Figure out if we need ape/geiger based formats or ouch formats
@@ -109,14 +119,14 @@ pmc_fit <- function(tree, data, model, ...){
 
   ## Run a fitContinuous fit ##
   if(type == "fitContinuous"){
-    object <- fitContinuous(phy = tree, dat = data, model = model, ..., ncores=1)
+    object <- geiger::fitContinuous(phy = tree, dat = data, model = model, ..., ncores=1)
 
   
   } else if(type == "hansen"){
     if(model == "hansen")
-       object <- hansen(data = data, tree = tree, ...)
+       object <- ouch::hansen(data = data, tree = tree, ...)
     else if(model == "brown")
-       object <- brown(data = data, tree = tree, ...)
+       object <- ouch::brown(data = data, tree = tree, ...)
 
   } else {
     stop("Error: format not recognized.")
@@ -129,7 +139,8 @@ pmc_fit <- function(tree, data, model, ...){
 #' @import ggplot2
 plot.pmc <- function(x, ...){
     df <- data.frame(null = x$null, test = x$test)
-    dat <- tidyr::gather_(df, "variable", "value", gather_cols = c("null", "test"))
+    dat <- tidyr::pivot_longer(df, names_to="variable", values_to= "value",
+                               c("null", "test"))
     ggplot(dat) + geom_density(aes_string("value", fill = "variable"), alpha = .7) +
            geom_vline(xintercept = x$lr, lwd = 1, lty = 2)
 }

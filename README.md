@@ -32,6 +32,8 @@ A trivial example with data simulated from the `lambda` model.
 ``` r
 library("pmc")
 library("geiger")
+library("phytools")
+
 #> Loading required package: ape
 phy <- sim.bdtree(n=10)
 dat <- sim.char(rescale(phy, "lambda", .5), 1)[,1,]
