@@ -9,3 +9,4 @@
 vignettes/*.source.Rmd
 README_cache/
 ^\.github$
+^CRAN-SUBMISSION$
