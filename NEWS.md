@@ -1,7 +1,7 @@
 ## News
 
 
-For a complete discription of changes see the 
+For a complete description of changes see the 
 [Issues page](https://github.com/cboettig/pmc/issues)
 on the package development site on GitHub.  
 

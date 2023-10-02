@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Travis-CI Build
-Status](https://travis-ci.org/cboettig/pmc.svg?branch=master)](https://travis-ci.org/cboettig/pmc)
+Status](https://app.travis-ci.com/cboettig/pmc.svg?branch=master)](https://app.travis-ci.com/cboettig/pmc)
 [![Coverage
 Status](https://coveralls.io/repos/cboettig/pmc/badge.svg)](https://coveralls.io/github/cboettig/pmc)
 [![CRAN

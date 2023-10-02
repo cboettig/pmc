@@ -2,8 +2,8 @@
 % Please edit documentation in R/pmc-package.R
 \docType{package}
 \name{pmc-package}
-\alias{pmc}
 \alias{pmc-package}
+\alias{_PACKAGE}
 \title{pmc: Phylogenetic Monte Carlo}
 \description{
 Monte Carlo based model choice for applied phylogenetics of continuous traits. Method described in Carl Boettiger, Graham Coop, Peter Ralph (2012) Is your phylogeny informative? Measuring the power of comparative methods, Evolution 66 (7) 2240-51. \doi{10.1111/j.1558-5646.2011.01574.x}.
