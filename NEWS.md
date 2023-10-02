@@ -5,6 +5,11 @@ For a complete description of changes see the
 [Issues page](https://github.com/cboettig/pmc/issues)
 on the package development site on GitHub.  
 
+v1.0.6
+------
+
+* Roxygen update
+
 
 v1.0.5
 ------
