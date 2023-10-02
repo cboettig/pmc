@@ -14,24 +14,24 @@ v1.0.6
 v1.0.5
 ------
 
-Compatibility with phytools/geiger
+* Compatibility with phytools.
 
 
 v1.0.4
 ------
 
-update DOI links as requested
+* update the DOI links as requested.
 
 v1.0.3
 ------
 
-fix CITATION file to use as.person() compatible author list
-fix images in README
+* fix CITATION file to use `as.person()` compatible author list
+* fix images in README
 
 v1.0.2
 ------
 
-* Fixes bug introduced by new version of tidyr & dplyr
+* Fixes bug introduced by new version of `tidyr` & `dplyr`
 
 
 v1.0.1
@@ -60,14 +60,15 @@ v0.0-7
 
 v0.0-6
 ------
- * Added error handling for cases when update routine fails
- * Fixed vignette
+
+* Added error handling for cases when update routine fails
+* Fixed vignette
 
 v0.0-5
 ------
 
- * Fixed the "white" method, which was lacking the simulation routine necessary to run
- * License is now Creative Commons Zero (CC0).  
+* Fixed the "white" method, which was lacking the simulation routine necessary to run
+* License is now Creative Commons Zero (CC0).  
 
 
 
